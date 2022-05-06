@@ -39,6 +39,10 @@ document.querySelector("#search-button").addEventListener("click", function () {
  });
 
 
+
+
+
+
 function getVid(videoDetails) {
     let i = 1
     for (let video of videoDetails) {
