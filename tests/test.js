@@ -12,9 +12,10 @@ function videoCount(divWidth) {
     } else {
         videoCount = 5;
     }
-
     return videoCount;
 }
+
+
 
 describe("Case", function () {
     it("Succesfully returned video count", function () {

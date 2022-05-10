@@ -1,6 +1,6 @@
 let template = document.querySelector('#Video_template').content;
 
-document.querySelector("#search-button").addEventListener("click", function () {
+document.querySelector("#search-button").addEventListener("click", function api() {
     if (document.querySelector("#search-query").value == "") {
         alert("Please enter a search term");
         return
@@ -21,21 +21,7 @@ document.querySelector("#search-button").addEventListener("click", function () {
                     getVid(videoDetails.items)
                 });
         });
-//     fetch("./search.json")
-//         .then(searchResults => searchResults.json())
-//         .then(searchResults => {
-//             let ids = []
-//             for (let video of searchResults.items) {
-//                 ids.push(video.id.videoId);
-//             }
-//             fetch("./searchvide.json")
-//                 .then(videoDetails => videoDetails.json())
-//                 .then(videoDetails => {
-//                     for (let i in searchResults.items)
-//                         videoDetails.items[i].snippet.shortDesc = searchResults.items[i].snippet.description;
-//                     getVid(videoDetails.items)
-//                 });
-//         });
+
  });
 
 

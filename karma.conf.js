@@ -1,12 +1,12 @@
 // Karma configuration
-// Generated on Mon Apr 25 2022 11:49:33 GMT+0530 (India Standard Time)
+// Generated on Sat May 07 2022 17:37:23 GMT+0530 (India Standard Time)
 
 module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
-  
+
 
     // frameworks to use
     // available frameworks: https://www.npmjs.com/search?q=keywords:karma-adapter
@@ -15,7 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'tests/test.js'
+      'tests/test.js',
     ],
 
 
@@ -64,7 +64,6 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser instances should be started simultaneously
-    concurrency: Infinity
-    
+    concurrency: Infinity,
   })
 }
