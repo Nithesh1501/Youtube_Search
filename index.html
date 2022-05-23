@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Youtube</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    
+    <body>
+    
+        <div class="main-bar">
+            <img src="images/yt.jpg" alt="youtube-logo" id="img" class="youtube-img">
+            <div class = "search-input">
+                <input type="text" id="search-query" value="" ><button id="search-button">🔎︎</button>
+            </div>
+        </div>
+    
+        <br><br><br><br>
+
+    <div class="main">
+    </div>
+    <div class="pages">
+    </div>
+
+    <template id="eachVideo">
+        <div class="ytVideo">
+            <div class="video">
+                <!-- <iframe src="" class="vid" frameborder="0" scrolling="no"></iframe> -->
+                <img src="./thumbnail.jpg" alt="" class="thumbnail">
+            </div>
+            <div class="info">
+                <div>
+                    <div class="title"></div>
+                    <div class="metaData">
+                        <div class="views"></div>
+                        <div class="published"></div>
+                    </div>
+                </div>
+                <div class="author"></div>
+                <div class="desc"></div>
+            </div>
+        </div>
+    </template>
+
+
+    
+    <script src="./script.js"></script>
+    <script src="tests/test.js" ></script>
+</body>
+
+</html>
