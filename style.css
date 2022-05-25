@@ -3,13 +3,6 @@
     box-sizing: border-box;
     font-family: "Roboto","Arial",sans-serif;
 }
-<<<<<<< HEAD
-=======
-html,body{
-    background-color: #181818;
-    color:#fff;
-}
->>>>>>> bc76988382b77509b7edc666f0542fb3896a81cd
 
 .main-bar
 {
@@ -57,7 +50,6 @@ html,body{
    top:0;
 }
 
-<<<<<<< HEAD
 html,body{
     background-color: #181818;
     color:#fff;
@@ -96,11 +88,6 @@ header button{
     padding: 7px;
     border-radius:5px;
     border:1px solid #333;
-=======
-
-body{
-    margin-bottom: 3rem;
->>>>>>> bc76988382b77509b7edc666f0542fb3896a81cd
 }
 
 .video img{

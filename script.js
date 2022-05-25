@@ -25,44 +25,39 @@ document.querySelector("#search-button").addEventListener("click", function () {
                 .then(videoDetails => {
                     for (let i in searchResults.items)
                         videoDetails.items[i].snippet.shortDesc = searchResults.items[i].snippet.description;
-                    getVideo(videoDetails.items)
+                    getVideo(videoDetails.items);
+                    
+                    displayVideos(ONE);
                 });
         });
 });
 
 
 function getVideo(videoDetails) {
-    let videoCounter = 1
-    for (let video of videoDetails) {
-        renderDetails(video, videoCounter++);
+    let videoCounter = ONE
+    for (let details of videoDetails) {
+        let video = document.importNode(template, true);
+        video.querySelector(".ytVideo").setAttribute("id", "video" + (videoCounter++));
+        video.querySelector(".title").textContent = details.snippet.title;
+        video.querySelector(".views").textContent = details.statistics.viewCount + " views";
+        video.querySelector(".published").textContent = details.snippet.publishedAt.substring(0, 10).split("-").join("/");
+        video.querySelector(".author").textContent = details.snippet.channelTitle;
+        video.querySelector(".author").setAttribute("onclick", "window.open('https://www.youtube.com/channel/" + details.snippet.channelId + "')");
+        video.querySelector(".desc").textContent = details.snippet.shortDesc;
+        
+        video.querySelector(".thumbnail").src = details.snippet.thumbnails.high.url;
+        video.querySelector(".thumbnail").setAttribute("onclick", "window.open('https://www.youtube.com/watch?v=" + details.id + "')");
+        document.querySelector(".main").appendChild(video);
     }
-    displayVideos(1);
 }
 
 window.onresize = function () {
     displayVideos(document.querySelectorAll(".active")[0].getAttribute("id").substring(4));
 }
 
-function renderDetails(details, i) {
-    let video = document.importNode(template, true);
-
-    video.querySelector(".ytVideo").setAttribute("id", "video" + i);
-    video.querySelector(".title").textContent = details.snippet.title;
-    video.querySelector(".views").textContent = details.statistics.viewCount + " views";
-    video.querySelector(".published").textContent = details.snippet.publishedAt.substring(0, 10).split("-").join("/");
-    video.querySelector(".author").textContent = details.snippet.channelTitle;
-    video.querySelector(".author").setAttribute("onclick", "window.open('https://www.youtube.com/channel/" + details.snippet.channelId + "')");
-    video.querySelector(".desc").textContent = details.snippet.shortDesc;
-    
-    video.querySelector(".thumbnail").src = details.snippet.thumbnails.high.url;
-    video.querySelector(".thumbnail").setAttribute("onclick", "window.open('https://www.youtube.com/watch?v=" + details.id + "')");
-
-    document.querySelector(".main").appendChild(video);
-}
-
 
 function hideAll() {
-    for (let videoid = 1; videoid <= maximum_videos; videoid++) {
+    for (let videoid = ONE; videoid <= maximum_videos; videoid++) {
         document.querySelector("#video" + videoid).style.display = "none";
     }
 }
@@ -72,7 +67,7 @@ function hideAll() {
 function generatePages(count) {
     let pages = document.querySelector(".pages");
     pages.textContent = "";
-    for (let pagenumber = 1; pagenumber <= count; pagenumber++) {
+    for (let pagenumber = ONE; pagenumber <= count; pagenumber++) {
         let page = document.createElement("div");
         page.setAttribute("class", "page");
         let btn = document.createElement("button");
@@ -93,14 +88,12 @@ function displayVideos(pageId) {
     while (Math.ceil(maximum_videos / videocount) < pageId) {
         pageId--;
     }
-
     for (let count = (videocount * (pageId - ONE)) + ONE; count <= (pageId * videocount) && count <= maximum_videos; count++) {
         document.querySelector("#video" + count).style.display = "block";
     }
-
     generatePages(Math.ceil(maximum_videos / videocount));
+    
     document.querySelector("#page" + pageId).classList.add("active");
-
 }
 
 function videoCount() {
