@@ -1,9 +1,5 @@
 // Karma configuration
-<<<<<<< HEAD
 // Generated on Wed May 11 2022 11:10:21 GMT+0530 (India Standard Time)
-=======
-// Generated on Sat May 07 2022 17:37:23 GMT+0530 (India Standard Time)
->>>>>>> bc76988382b77509b7edc666f0542fb3896a81cd
 
 module.exports = function(config) {
   config.set({
@@ -18,13 +14,7 @@ module.exports = function(config) {
 
 
     // list of files / patterns to load in the browser
-<<<<<<< HEAD
     files: ['tests/test.js'],
-=======
-    files: [
-      'tests/test.js',
-    ],
->>>>>>> bc76988382b77509b7edc666f0542fb3896a81cd
 
 
     // list of files / patterns to exclude
@@ -72,10 +62,6 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser instances should be started simultaneously
-<<<<<<< HEAD
     concurrency: Infinity
-=======
-    concurrency: Infinity,
->>>>>>> bc76988382b77509b7edc666f0542fb3896a81cd
   })
 }
