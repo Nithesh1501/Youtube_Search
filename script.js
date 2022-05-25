@@ -1,11 +1,13 @@
 let template = document.querySelector('#eachVideo').content;
-const maximum_videos = 15
 
+const maximum_videos = 15
+const ZERO = 0;
 const ONE = 1;
 const TWO = 2;
 const THREE = 3;
 const FOUR = 4;
 const FIVE = 5;
+const TEN = 10;
 
 document.querySelector("#search-button").addEventListener("click", function () {
     if (document.querySelector("#search-query").value == "") {
@@ -26,21 +28,20 @@ document.querySelector("#search-button").addEventListener("click", function () {
                     for (let i in searchResults.items)
                         videoDetails.items[i].snippet.shortDesc = searchResults.items[i].snippet.description;
                     getVideo(videoDetails.items);
-                    
-                    displayVideos(ONE);
+                    display_videos_and_pagenumbers(ONE);
                 });
         });
 });
 
 
 function getVideo(videoDetails) {
-    let videoCounter = ONE
+    let videoCounter = ONE;
     for (let details of videoDetails) {
         let video = document.importNode(template, true);
         video.querySelector(".ytVideo").setAttribute("id", "video" + (videoCounter++));
         video.querySelector(".title").textContent = details.snippet.title;
         video.querySelector(".views").textContent = details.statistics.viewCount + " views";
-        video.querySelector(".published").textContent = details.snippet.publishedAt.substring(0, 10).split("-").join("/");
+        video.querySelector(".published").textContent = details.snippet.publishedAt.substring(ZERO, TEN).split("-").join("/");
         video.querySelector(".author").textContent = details.snippet.channelTitle;
         video.querySelector(".author").setAttribute("onclick", "window.open('https://www.youtube.com/channel/" + details.snippet.channelId + "')");
         video.querySelector(".desc").textContent = details.snippet.shortDesc;
@@ -52,19 +53,25 @@ function getVideo(videoDetails) {
 }
 
 window.onresize = function () {
-    displayVideos(document.querySelectorAll(".active")[0].getAttribute("id").substring(4));
+    display_videos_and_pagenumbers(document.querySelectorAll(".active")[ZERO].getAttribute("id").substring(FOUR));
 }
 
+function display_videos_and_pagenumbers(pageId) {
 
-function hideAll() {
     for (let videoid = ONE; videoid <= maximum_videos; videoid++) {
         document.querySelector("#video" + videoid).style.display = "none";
     }
-}
 
+    let videocount = videoCount();
+    while (Math.ceil(maximum_videos / videocount) < pageId) {
+        pageId--;
+    }
 
+    for (let count = (videocount * (pageId - ONE)) + ONE; count <= (pageId * videocount) && count <= maximum_videos; count++) {
+        document.querySelector("#video" + count).style.display = "block";
+    }
 
-function generatePages(count) {
+    count = Math.ceil(maximum_videos / videocount)
     let pages = document.querySelector(".pages");
     pages.textContent = "";
     for (let pagenumber = ONE; pagenumber <= count; pagenumber++) {
@@ -74,30 +81,16 @@ function generatePages(count) {
         btn.setAttribute("id", "page" + pagenumber);
         let pageId = pagenumber;
         btn.setAttribute("pageId", pageId)
-        btn.setAttribute("onclick", "displayVideos(" + pageId + ")");
+        btn.setAttribute("onclick", "display_videos_and_pagenumbers(" + pageId + ")");
         btn.textContent = pagenumber;
         page.appendChild(btn);
         pages.appendChild(page);
     }
-}
-
-
-function displayVideos(pageId) {
-    hideAll();
-    let videocount = videoCount();
-    while (Math.ceil(maximum_videos / videocount) < pageId) {
-        pageId--;
-    }
-    for (let count = (videocount * (pageId - ONE)) + ONE; count <= (pageId * videocount) && count <= maximum_videos; count++) {
-        document.querySelector("#video" + count).style.display = "block";
-    }
-    generatePages(Math.ceil(maximum_videos / videocount));
-    
     document.querySelector("#page" + pageId).classList.add("active");
 }
 
 function videoCount() {
-    let divWidth = document.querySelectorAll(".main")[0].offsetWidth;
+    let divWidth = document.querySelectorAll(".main")[ZERO].offsetWidth;
     let videoCount;
     if (divWidth < 500) {
         videoCount = ONE;
@@ -111,7 +104,7 @@ function videoCount() {
         videoCount = FIVE;
     }
 
-    document.querySelectorAll(".main")[0].style.setProperty('grid-template-columns', 'repeat(' + videoCount + ', 1fr)')
+    document.querySelectorAll(".main")[ZERO].style.setProperty('grid-template-columns', 'repeat(' + videoCount + ', 1fr)');
     return videoCount;
 }
 
