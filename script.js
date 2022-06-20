@@ -8,6 +8,10 @@ const THREE = 3;
 const FOUR = 4;
 const FIVE = 5;
 const TEN = 10;
+const FIVEHUNDREDWIDTH = 500;
+const NINEHUNDREDWIDTH = 900;
+const TWELVEHUNDREDWIDTH = 1200;
+const FIFTEENHUNDREDWIDTH =1500;
 
 document.querySelector("#search-button").addEventListener("click", function () {
     if (document.querySelector("#search-query").value == "") {
@@ -92,13 +96,13 @@ function display_videos_and_pagenumbers(pageId) {
 function videoCount() {
     let divWidth = document.querySelectorAll(".main")[ZERO].offsetWidth;
     let videoCount;
-    if (divWidth < 500) {
+    if (divWidth < FIVEHUNDREDWIDTH) {
         videoCount = ONE;
-    } else if (divWidth < 900) {
+    } else if (divWidth < NINEHUNDREDWIDTH) {
         videoCount = TWO;
-    } else if (divWidth < 1200) {
+    } else if (divWidth < TWELVEHUNDREDWIDTH) {
         videoCount = THREE;
-    } else if (divWidth < 1500) {
+    } else if (divWidth < FIFTEENHUNDREDWIDTH) {
         videoCount = FOUR;
     } else {
         videoCount = FIVE;
