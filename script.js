@@ -8,10 +8,6 @@ const THREE = 3;
 const FOUR = 4;
 const FIVE = 5;
 const TEN = 10;
-const FIVEHUNDREDWIDTH = 500;
-const NINEHUNDREDWIDTH = 900;
-const TWELVEHUNDREDWIDTH = 1200;
-const FIFTEENHUNDREDWIDTH =1500;
 
 document.querySelector("#search-button").addEventListener("click", function () {
     if (document.querySelector("#search-query").value == "") {
@@ -32,7 +28,7 @@ document.querySelector("#search-button").addEventListener("click", function () {
                     for (let i in searchResults.items)
                         videoDetails.items[i].snippet.shortDesc = searchResults.items[i].snippet.description;
                     getVideo(videoDetails.items);
-                    display_videos_and_pagenumbers(ONE);
+                    displayVideosandPagenumbers(ONE);
                 });
         });
 });
@@ -57,10 +53,10 @@ function getVideo(videoDetails) {
 }
 
 window.onresize = function () {
-    display_videos_and_pagenumbers(document.querySelectorAll(".active")[ZERO].getAttribute("id").substring(FOUR));
+    displayVideosandPagenumbers(document.querySelectorAll(".active")[ZERO].getAttribute("id").substring(FOUR));
 }
 
-function display_videos_and_pagenumbers(pageId) {
+function displayVideosandPagenumbers(pageId) {
 
     for (let videoid = ONE; videoid <= maximum_videos; videoid++) {
         document.querySelector("#video" + videoid).style.display = "none";
@@ -85,7 +81,7 @@ function display_videos_and_pagenumbers(pageId) {
         btn.setAttribute("id", "page" + pagenumber);
         let pageId = pagenumber;
         btn.setAttribute("pageId", pageId)
-        btn.setAttribute("onclick", "display_videos_and_pagenumbers(" + pageId + ")");
+        btn.setAttribute("onclick", "displayVideosandPagenumbers(" + pageId + ")");
         btn.textContent = pagenumber;
         page.appendChild(btn);
         pages.appendChild(page);
@@ -96,20 +92,19 @@ function display_videos_and_pagenumbers(pageId) {
 function videoCount() {
     let divWidth = document.querySelectorAll(".main")[ZERO].offsetWidth;
     let videoCount;
-    if (divWidth < FIVEHUNDREDWIDTH) {
+    if (divWidth < 500) {
         videoCount = ONE;
-    } else if (divWidth < NINEHUNDREDWIDTH) {
+    } else if (divWidth < 900) {
         videoCount = TWO;
-    } else if (divWidth < TWELVEHUNDREDWIDTH) {
+    } else if (divWidth < 1200) {
         videoCount = THREE;
-    } else if (divWidth < FIFTEENHUNDREDWIDTH) {
+    } else if (divWidth < 1500) {
         videoCount = FOUR;
     } else {
         videoCount = FIVE;
     }
-
-    document.querySelectorAll(".main")[ZERO].style.setProperty('grid-template-columns', 'repeat(' + videoCount + ', 1fr)');
+    document.querySelectorAll(".main")[ZERO].style.setProperty('grid-template-columns', 
+    'repeat(' + videoCount + ', 1fr)');
     return videoCount;
 }
 
-// export const videoCount = videoCount;
